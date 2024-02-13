@@ -36,3 +36,25 @@ function deleteZeroSum(head) {
 
     return dummy.next;
 }
+function printLinkedList(head) {
+    let current = head;
+    while (current) {
+        console.log(current.data);
+        current = current.next;
+    }
+}
+
+// Example usage
+const head = new Node(3);
+head.next = new Node(4);
+head.next.next = new Node(-7);
+head.next.next.next = new Node(5);
+head.next.next.next.next = new Node(-6);
+
+console.log("Original Linked List:");
+printLinkedList(head);
+
+const newHead = deleteZeroSum(head);
+
+console.log("\nLinked List after Deleting Elements with Zero Sum:");
+printLinkedList(newHead);
