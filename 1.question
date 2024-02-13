@@ -1,0 +1,38 @@
+class Node {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+function deleteZeroSum(head) {
+    let current = head;
+    let sum = 0;
+    const sumSet = new Set();
+    let dummy = new Node(0);
+    dummy.next = head;
+    let prefixSum = 0;
+
+    while (current) {
+        prefixSum += current.data;
+
+        if (sumSet.has(prefixSum)) {
+            let temp = sumSet[prefixSum].next;
+            let tempSum = prefixSum + temp.data;
+
+            while (temp !== current) {
+                sumSet.delete(tempSum);
+                temp = temp.next;
+                tempSum += temp.data;
+            }
+
+            sumSet[prefixSum].next = current.next;
+        } else {
+            sumSet[prefixSum] = current;
+        }
+
+        current = current.next;
+    }
+
+    return dummy.next;
+}
